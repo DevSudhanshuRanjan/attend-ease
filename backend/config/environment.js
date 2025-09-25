@@ -7,8 +7,10 @@ const environments = {
     server: {
       port: process.env.PORT || 3001,
       cors: {
-        origin: ['http://localhost:5173', 'http://localhost:5174'],
-        credentials: true
+        origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:3000', 'http://localhost:4173'],
+        credentials: true,
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin']
       }
     },
     browser: {
@@ -33,8 +35,16 @@ const environments = {
     server: {
       port: process.env.PORT || 8080,
       cors: {
-        origin: process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : ['https://attend-ease-theta-two.vercel.app'],
-        credentials: true
+        origin: process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [
+          'https://attend-ease-theta-two.vercel.app',
+          'https://attend-ease.vercel.app',
+          'https://attend-ease-devsudhanshuranajan.vercel.app',
+          /^https:\/\/attend-ease.*\.vercel\.app$/,
+          /^https:\/\/.*\.vercel\.app$/
+        ],
+        credentials: true,
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin']
       }
     },
     browser: {
