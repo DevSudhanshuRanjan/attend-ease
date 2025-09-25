@@ -15,6 +15,12 @@ build/
 .env.test.local
 .env.production.local
 
+# Generated files
+*.png
+*.jpg
+*.jpeg
+upes-dashboard.*
+
 # IDE/Editor files
 .vscode/
 .idea/
@@ -65,3 +71,7 @@ jspm_packages/
 
 # vite cache
 .vite
+
+# Render deployment files (if any)
+render.yaml
+.render-build-id

@@ -1,4 +1,4 @@
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer');
 const { findChrome } = require('../utils/browserFinder');
 require('dotenv').config();
 

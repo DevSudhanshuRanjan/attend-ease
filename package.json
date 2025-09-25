@@ -1,42 +1,26 @@
 {
-  "name": "attendease-react",
+  "name": "attendease-fullstack",
   "version": "1.0.0",
-  "description": "React version of AttendEase - Easy way to get your attendance report!",
-  "main": "index.js",
+  "description": "Professional UPES Attendance Management System",
+  "private": true,
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "server": "node server/index.js",
-    "dev:server": "nodemon server/index.js",
-    "dev:full": "concurrently \"npm run dev\" \"npm run dev:server\""
-  },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "jspdf": "^2.5.1",
-    "jspdf-autotable": "^3.5.30",
-    "sortablejs": "^1.15.0",
-    "react-sortablejs": "^6.1.4",
-    "axios": "^1.6.2"
+    "dev": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "start": "npm start --prefix backend",
+    "build": "npm run build --prefix frontend",
+    "install:all": "npm install --prefix frontend && npm install --prefix backend"
   },
   "devDependencies": {
-    "@types/react": "^18.2.43",
-    "@types/react-dom": "^18.2.17",
-    "@vitejs/plugin-react": "^4.2.1",
-    "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.32",
-    "tailwindcss": "^3.3.6",
-    "vite": "^5.0.8",
-    "nodemon": "^3.0.2",
     "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "keywords": [
     "attendance",
-    "calculator",
+    "upes",
     "react",
-    "tailwind",
-    "pdf"
+    "nodejs",
+    "express"
   ],
   "author": "DevSudhanshuRanjan",
   "license": "MIT"
