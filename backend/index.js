@@ -72,10 +72,12 @@ app.use(cors(config.server.cors));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Health check endpoint
-app.get('/health', (req, res) => {
+// Health check endpoints (both /health and /api/health)
+const healthCheck = (req, res) => {
   const healthData = {
+    success: true,
     status: 'OK', 
+    message: 'API is running',
     timestamp: new Date().toISOString(),
     uptime: Math.floor(process.uptime()),
     environment: config.global.environment,
@@ -87,7 +89,10 @@ app.get('/health', (req, res) => {
   
   logger.debug('Health check requested', healthData);
   res.status(200).json(healthData);
-});
+};
+
+app.get('/health', healthCheck);
+app.get('/api/health', healthCheck);
 
 // API routes
 app.use('/api/auth', authRoutes);
