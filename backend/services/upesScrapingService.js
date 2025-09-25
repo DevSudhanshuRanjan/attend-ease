@@ -13,12 +13,19 @@ class UPESScrapingService {
    */
   async initBrowser() {
     try {
-      // Find Chrome browser
-      const chromePath = await findChrome();
+      // For production deployment (Render), use environment variable
+      let chromePath = process.env.PUPPETEER_EXECUTABLE_PATH;
       
+      // For development or if env var not set, find Chrome locally
       if (!chromePath) {
-        throw new Error('Chrome browser not found. Please install Google Chrome or Chromium.');
+        chromePath = await findChrome();
+        
+        if (!chromePath) {
+          throw new Error('Chrome browser not found. Please install Google Chrome or Chromium.');
+        }
       }
+
+      console.log('Using Chrome path:', chromePath);
 
       this.browser = await puppeteer.launch({
         headless: 'new', // Use new headless mode
