@@ -33,7 +33,7 @@ const environments = {
     server: {
       port: process.env.PORT || 8080,
       cors: {
-        origin: process.env.ALLOWED_ORIGINS?.split(',') || ['https://yourdomain.com'],
+        origin: process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : ['https://attend-ease-theta-two.vercel.app'],
         credentials: true
       }
     },
