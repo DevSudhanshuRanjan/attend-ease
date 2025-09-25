@@ -13,6 +13,9 @@ const { errorHandler } = require('./middleware/errorHandler');
 const app = express();
 const PORT = config.server.port;
 
+// Trust proxy - required for Render deployment
+app.set('trust proxy', 1);
+
 // Request logging middleware
 app.use((req, res, next) => {
   const start = Date.now();
