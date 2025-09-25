@@ -1,0 +1,7 @@
+# Ignore server directory for frontend deployment
+server/
+*.log
+node_modules/
+.env
+.env.local
+.env.production
