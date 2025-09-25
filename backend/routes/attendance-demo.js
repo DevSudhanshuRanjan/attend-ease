@@ -63,15 +63,16 @@ router.post('/fetch',
       // Simulate processing time
       await new Promise(resolve => setTimeout(resolve, 2000));
 
-      // Return mock attendance data that matches frontend expectations
+      // Return comprehensive mock attendance data matching UPES portal structure
       const mockAttendanceData = {
         success: true,
         student: {
-          name: "Demo Student",
-          studentId: userId,
+          name: "Anvesha Tyagi",
+          studentId: "590018435",
           course: "B.Tech CSE",
           semester: "Semester 3",
-          status: "ACTIVE"
+          status: "ACTIVE",
+          profilePhoto: "https://via.placeholder.com/150x150/4A90E2/FFFFFF?text=AT"
         },
         attendance: [
           {
@@ -113,25 +114,80 @@ router.post('/fetch',
           {
             subject: "Elements of AIML",
             subjectCode: "CSBT305",
-            total: 19,
+            total: 20,
             attended: 19, 
+            percentage: 95.0,
+            status: "Excellent",
+            faculty: "Dr. Davis"
+          },
+          {
+            subject: "Fundamentals of Clinical Research",
+            subjectCode: "HSBT206",
+            total: 12,
+            attended: 12,
             percentage: 100,
             status: "Perfect",
-            faculty: "Dr. Davis"
+            faculty: "Dr. Sharma"
+          },
+          {
+            subject: "Histories of Environment",
+            subjectCode: "HSBT207",
+            total: 4,
+            attended: 4,
+            percentage: 100,
+            status: "Perfect",
+            faculty: "Prof. Kumar"
+          },
+          {
+            subject: "Biomedical Diagnostics",
+            subjectCode: "HSBT208",
+            total: 6,
+            attended: 5,
+            percentage: 83.33,
+            status: "Good",
+            faculty: "Dr. Patel"
+          },
+          {
+            subject: "Computer Networks",
+            subjectCode: "CSBT306",
+            total: 18,
+            attended: 15,
+            percentage: 83.33,
+            status: "Good",
+            faculty: "Prof. Singh"
+          },
+          {
+            subject: "Software Engineering",
+            subjectCode: "CSBT307",
+            total: 20,
+            attended: 16,
+            percentage: 80.0,
+            status: "Good",
+            faculty: "Dr. Gupta"
           }
         ],
         overallAttendance: {
-          totalClasses: 101,
-          attendedClasses: 95,
-          overallPercentage: 94.06,
-          status: "Excellent"
+          totalClasses: 142,
+          attendedClasses: 127,
+          overallPercentage: 89.44,
+          status: "Excellent",
+          totalSubjects: 10,
+          safeSubjects: 8,
+          warningSubjects: 2,
+          criticalSubjects: 0,
+          recommendations: [
+            "Excellent! All subjects have safe attendance.",
+            "Keep up the great work and maintain regular class attendance.",
+            "Focus on Computer Networks and Software Engineering to improve further."
+          ]
         },
         metadata: {
           requestedBy: userId,
           requestTime: new Date().toISOString(),
-          source: 'DEMO - UPES Beta Portal Simulation',
-          version: '1.0',
-          note: 'This is demo data. Real scraping requires browser support on the server.'
+          source: 'Enhanced Demo - UPES Beta Portal Simulation',
+          version: '2.0',
+          lastUpdated: 'Jan 25, 2025 10:14 PM',
+          note: 'This is enhanced demo data matching the real UPES portal structure.'
         }
       };
 
