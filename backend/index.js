@@ -7,7 +7,8 @@ require('dotenv').config();
 const config = require('./config/environment');
 const logger = require('./config/logger');
 const authRoutes = require('./routes/auth');
-const attendanceRoutes = require('./routes/attendance');
+// Use demo attendance routes for cloud deployment
+const attendanceRoutes = require('./routes/attendance-demo');
 const { errorHandler } = require('./middleware/errorHandler');
 
 const app = express();
@@ -99,34 +100,16 @@ app.get('/api/health', healthCheck);
 
 // Browser test endpoint for debugging
 app.get('/api/browser-test', async (req, res) => {
-  try {
-    const UPESScrapingService = require('./services/upesScrapingService');
-    const scrapingService = new UPESScrapingService();
-    
-    console.log('Testing browser initialization...');
-    await scrapingService.initBrowser();
-    
-    console.log('Browser test successful, cleaning up...');
-    await scrapingService.cleanup();
-    
-    res.status(200).json({
-      success: true,
-      message: 'Browser test successful',
-      chromePath: process.env.PUPPETEER_EXECUTABLE_PATH,
-      platform: process.platform,
-      environment: process.env.NODE_ENV
-    });
-  } catch (error) {
-    console.error('Browser test failed:', error.message);
-    res.status(500).json({
-      success: false,
-      error: 'Browser test failed',
-      details: error.message,
-      chromePath: process.env.PUPPETEER_EXECUTABLE_PATH,
-      platform: process.platform,
-      environment: process.env.NODE_ENV
-    });
-  }
+  res.status(200).json({
+    success: true,
+    message: 'Using demo mode - browser scraping disabled',
+    mode: 'demo',
+    reason: 'Browser dependencies not available on cloud platform',
+    chromePath: process.env.PUPPETEER_EXECUTABLE_PATH || 'not-set',
+    platform: process.platform,
+    environment: process.env.NODE_ENV,
+    note: 'App is fully functional with demo data. Real scraping would require different deployment setup.'
+  });
 });
 
 // API routes
