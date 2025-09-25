@@ -63,20 +63,20 @@ router.post('/fetch',
       // Simulate processing time
       await new Promise(resolve => setTimeout(resolve, 2000));
 
-      // Return mock attendance data that looks realistic
+      // Return mock attendance data that matches frontend expectations
       const mockAttendanceData = {
         success: true,
-        studentInfo: {
+        student: {
           name: "Demo Student",
           studentId: userId,
           course: "B.Tech CSE",
           semester: "Semester 3",
           status: "ACTIVE"
         },
-        subjects: [
+        attendance: [
           {
+            subject: "Discrete Mathematical Structures",
             subjectCode: "CSBT301",
-            subjectName: "Discrete Mathematical Structures",
             totalClasses: 16,
             attendedClasses: 14,
             attendancePercentage: 87.5,
@@ -84,8 +84,8 @@ router.post('/fetch',
             faculty: "Dr. Smith"
           },
           {
+            subject: "Operating Systems",
             subjectCode: "CSBT302", 
-            subjectName: "Operating Systems",
             totalClasses: 19,
             attendedClasses: 17,
             attendancePercentage: 89.47,
@@ -93,8 +93,8 @@ router.post('/fetch',
             faculty: "Prof. Johnson"
           },
           {
+            subject: "Database Management Systems",
             subjectCode: "CSBT303",
-            subjectName: "Database Management Systems", 
             totalClasses: 23,
             attendedClasses: 21,
             attendancePercentage: 91.3,
@@ -102,8 +102,8 @@ router.post('/fetch',
             faculty: "Dr. Williams"
           },
           {
+            subject: "Design and Analysis of Algorithms",
             subjectCode: "CSBT304",
-            subjectName: "Design and Analysis of Algorithms",
             totalClasses: 24,
             attendedClasses: 24,
             attendancePercentage: 100,
@@ -111,8 +111,8 @@ router.post('/fetch',
             faculty: "Prof. Brown"
           },
           {
+            subject: "Elements of AIML",
             subjectCode: "CSBT305",
-            subjectName: "Elements of AIML",
             totalClasses: 19,
             attendedClasses: 19, 
             attendancePercentage: 100,
