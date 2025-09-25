@@ -49,7 +49,7 @@ router.post('/fetch',
 
     const { password } = req.body;
     const userId = req.user.userId; // From JWT token
-    const userEmail = req.user.email; // Get email from token
+    const userEmail = req.user.email || req.user.userId; // Fallback to userId if email not available
 
     if (!password || !userId) {
       return res.status(400).json({
@@ -238,7 +238,7 @@ router.get('/attendance', authenticateToken, async (req, res) => {
   try {
     // Get user info from JWT token
     const userId = req.user.userId;
-    const userEmail = req.user.email;
+    const userEmail = req.user.email || req.user.userId; // Fallback to userId if email not available
     
     // Simulate processing delay
     await new Promise(resolve => setTimeout(resolve, 1000));

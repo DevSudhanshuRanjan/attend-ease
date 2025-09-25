@@ -72,9 +72,10 @@ router.post('/login', loginLimiter, validateLoginInput, asyncHandler(async (req,
   // This approach is more secure as we don't store credentials
 
   try {
-    // Generate a session token
+    // Generate a session token with email
     const payload = {
       userId: sanitizedUserId,
+      email: sanitizedUserId, // Use userId as email for demo
       loginTime: Date.now(),
       sessionId: `session_${Date.now()}_${Math.random().toString(36).substring(2)}`
     };
