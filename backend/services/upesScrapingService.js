@@ -13,22 +13,16 @@ class UPESScrapingService {
    */
   async initBrowser() {
     try {
-      // For production deployment (Render), use environment variable
-      let chromePath = process.env.PUPPETEER_EXECUTABLE_PATH;
-      
-      // For development or if env var not set, find Chrome locally
-      if (!chromePath) {
-        chromePath = await findChrome();
-        
-        if (!chromePath) {
-          throw new Error('Chrome browser not found. Please install Google Chrome or Chromium.');
-        }
-      }
-
-      console.log('Using Chrome path:', chromePath);
       console.log('Environment:', process.env.NODE_ENV);
       console.log('Platform:', process.platform);
 
+      let browserOptions = {
+        headless: 'new',
+        timeout: parseInt(process.env.BROWSER_TIMEOUT) || 60000,
+        defaultViewport: { width: 1280, height: 720 }
+      };
+
+      // Enhanced browser args for cloud deployment
       const browserArgs = [
         '--no-sandbox',
         '--disable-setuid-sandbox',
@@ -44,18 +38,42 @@ class UPESScrapingService {
         '--disable-plugins',
         '--disable-background-timer-throttling',
         '--disable-backgrounding-occluded-windows',
-        '--disable-renderer-backgrounding'
+        '--disable-renderer-backgrounding',
+        '--disable-default-apps',
+        '--disable-sync',
+        '--no-default-browser-check',
+        '--no-first-run',
+        '--disable-background-networking'
       ];
 
-      console.log('Browser args:', browserArgs);
-
-      this.browser = await puppeteer.launch({
-        headless: 'new', // Use new headless mode
-        executablePath: chromePath,
-        args: browserArgs,
-        timeout: parseInt(process.env.BROWSER_TIMEOUT) || 60000,
-        defaultViewport: { width: 1280, height: 720 }
-      });
+      // For production, try system browser first, fallback to bundled Chromium
+      if (process.env.NODE_ENV === 'production' && process.env.PUPPETEER_EXECUTABLE_PATH) {
+        console.log('Trying system Chrome:', process.env.PUPPETEER_EXECUTABLE_PATH);
+        browserOptions.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+        browserOptions.args = browserArgs;
+        
+        try {
+          this.browser = await puppeteer.launch(browserOptions);
+          console.log('System Chrome launched successfully');
+        } catch (systemError) {
+          console.log('System Chrome failed, falling back to bundled Chromium:', systemError.message);
+          // Fallback to bundled Chromium
+          delete browserOptions.executablePath;
+          this.browser = await puppeteer.launch(browserOptions);
+          console.log('Bundled Chromium launched successfully');
+        }
+      } else {
+        // Development: find local Chrome or use bundled
+        const chromePath = await findChrome();
+        if (chromePath) {
+          console.log('Using local Chrome:', chromePath);
+          browserOptions.executablePath = chromePath;
+        } else {
+          console.log('Using bundled Chromium');
+        }
+        browserOptions.args = browserArgs;
+        this.browser = await puppeteer.launch(browserOptions);
+      }
 
       console.log('Browser launched successfully');
 

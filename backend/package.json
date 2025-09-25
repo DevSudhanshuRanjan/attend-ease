@@ -7,9 +7,6 @@
     "node": ">=18.0.0",
     "npm": ">=8.0.0"
   },
-  "config": {
-    "puppeteer_skip_chromium_download": "true"
-  },
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
