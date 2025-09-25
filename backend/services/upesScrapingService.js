@@ -26,25 +26,42 @@ class UPESScrapingService {
       }
 
       console.log('Using Chrome path:', chromePath);
+      console.log('Environment:', process.env.NODE_ENV);
+      console.log('Platform:', process.platform);
+
+      const browserArgs = [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-accelerated-2d-canvas',
+        '--no-first-run',
+        '--no-zygote',
+        '--disable-gpu',
+        '--disable-web-security',
+        '--disable-features=VizDisplayCompositor',
+        '--window-size=1280,720',
+        '--disable-extensions',
+        '--disable-plugins',
+        '--disable-background-timer-throttling',
+        '--disable-backgrounding-occluded-windows',
+        '--disable-renderer-backgrounding'
+      ];
+
+      console.log('Browser args:', browserArgs);
 
       this.browser = await puppeteer.launch({
         headless: 'new', // Use new headless mode
         executablePath: chromePath,
-        args: [
-          '--no-sandbox',
-          '--disable-setuid-sandbox',
-          '--disable-dev-shm-usage',
-          '--disable-accelerated-2d-canvas',
-          '--no-first-run',
-          '--no-zygote',
-          '--disable-gpu',
-          '--disable-web-security',
-          '--disable-features=VizDisplayCompositor',
-          '--window-size=1280,720'
-        ],
+        args: browserArgs,
         timeout: parseInt(process.env.BROWSER_TIMEOUT) || 60000,
         defaultViewport: { width: 1280, height: 720 }
       });
+
+      console.log('Browser launched successfully');
+
+      this.page = await this.browser.newPage();
+      
+      console.log('New page created successfully');
 
       this.page = await this.browser.newPage();
       

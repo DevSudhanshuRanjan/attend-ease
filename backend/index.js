@@ -97,6 +97,38 @@ const healthCheck = (req, res) => {
 app.get('/health', healthCheck);
 app.get('/api/health', healthCheck);
 
+// Browser test endpoint for debugging
+app.get('/api/browser-test', async (req, res) => {
+  try {
+    const UPESScrapingService = require('./services/upesScrapingService');
+    const scrapingService = new UPESScrapingService();
+    
+    console.log('Testing browser initialization...');
+    await scrapingService.initBrowser();
+    
+    console.log('Browser test successful, cleaning up...');
+    await scrapingService.cleanup();
+    
+    res.status(200).json({
+      success: true,
+      message: 'Browser test successful',
+      chromePath: process.env.PUPPETEER_EXECUTABLE_PATH,
+      platform: process.platform,
+      environment: process.env.NODE_ENV
+    });
+  } catch (error) {
+    console.error('Browser test failed:', error.message);
+    res.status(500).json({
+      success: false,
+      error: 'Browser test failed',
+      details: error.message,
+      chromePath: process.env.PUPPETEER_EXECUTABLE_PATH,
+      platform: process.platform,
+      environment: process.env.NODE_ENV
+    });
+  }
+});
+
 // API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/attendance', attendanceRoutes);
