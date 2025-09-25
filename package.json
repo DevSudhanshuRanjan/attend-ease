@@ -1,0 +1,52 @@
+{
+  "name": "attendease-react",
+  "version": "1.0.0",
+  "description": "React version of AttendEase - Easy way to get your attendance report!",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "server": "node server/index.js",
+    "dev:server": "nodemon server/index.js",
+    "dev:full": "concurrently \"npm run dev\" \"npm run dev:server\""
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.5.30",
+    "sortablejs": "^1.15.0",
+    "react-sortablejs": "^6.1.4",
+    "axios": "^1.6.2",
+    "express": "^4.18.2",
+    "puppeteer-core": "^24.10.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.1.5",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "express-validator": "^7.0.1",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.3.6",
+    "vite": "^5.0.8",
+    "nodemon": "^3.0.2",
+    "concurrently": "^8.2.2"
+  },
+  "keywords": [
+    "attendance",
+    "calculator",
+    "react",
+    "tailwind",
+    "pdf"
+  ],
+  "author": "DevSudhanshuRanjan",
+  "license": "MIT"
+}
