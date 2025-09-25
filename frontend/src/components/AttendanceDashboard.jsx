@@ -145,15 +145,13 @@ const AttendanceDashboard = ({
               {/* Last Updated */}
               <div className="mb-4 text-center w-full">
                 <p className="text-xs text-gray-500">
-                  {attendanceData.metadata?.lastUpdated 
-                    ? `Last Updated: ${attendanceData.metadata.lastUpdated}`
-                    : `Last Updated: ${new Date(attendanceData.metadata?.requestTime || attendanceData.timestamp).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                      })}`}
+                  Last Updated: {new Date(attendanceData.timestamp).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  })}
                 </p>
               </div>
 

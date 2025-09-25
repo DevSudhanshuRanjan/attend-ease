@@ -1,7 +1,0 @@
-{
-  "scripts": {
-    "preinstall": "echo 'Installing backend dependencies for Render...'",
-    "postinstall": "echo 'Backend ready for deployment!'",
-    "health-check": "curl -f http://localhost:$PORT/health || exit 1"
-  }
-}

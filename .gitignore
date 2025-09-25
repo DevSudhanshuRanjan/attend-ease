@@ -74,4 +74,19 @@ jspm_packages/
 
 # Render deployment files (if any)
 render.yaml
+render.json
 .render-build-id
+
+# Vercel deployment files
+.vercel/
+.vercel
+
+# Demo and test files
+*-demo.*
+*-test.*
+
+# Documentation images
+*.png
+*.jpg
+*.jpeg
+*.gif
